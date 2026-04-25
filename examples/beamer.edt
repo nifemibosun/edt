@@ -1,0 +1,166 @@
+<!--
+  edt example: Beamer presentation
+  Shows: <frame>, <block>, overlays, math, theorem environments
+-->
+
+<document class="beamer">
+  <usepackage name="amsmath"/>
+  <usepackage name="amsthm"/>
+  <usepackage name="mathtools"/>
+
+  <usetheme name="Madrid"/>
+  <usecolortheme name="beaver"/>
+
+  <newcommand cmd="\Z">\mathbb{Z}</newcommand>
+  <newcommand cmd="\Q">\mathbb{Q}</newcommand>
+  <newcommand cmd="\R">\mathbb{R}</newcommand>
+  <newcommand cmd="\C">\mathbb{C}</newcommand>
+  <declareoperator cmd="\Res" name="Res"/>
+
+  <body>
+    <title>The Hardy-Littlewood Circle Method</title>
+    <author>N. Bosun</author>
+    <date>\today</date>
+    <maketitle/>
+
+    <!-- ── Outline ─────────────────────────────────────────────── -->
+
+    <frame title="Outline">
+      <tableofcontents/>
+    </frame>
+
+    <!-- ── Section 1 ───────────────────────────────────────────── -->
+
+    <section name="Setup">
+
+      <frame title="The Goldbach Problem">
+        <block title="Goldbach's Conjecture (1742)">
+          Every even integer <m>n \geq 4</m> is the sum of two primes.
+        </block>
+
+        <pause/>
+
+        <p>
+          Define the <alert>representation function</alert>
+          <dmath>
+            r(n) \;=\; \sum_{\substack{p + q = n \\ p,\, q \text{ prime}}} 1.
+          </dmath>
+        </p>
+
+        <pause/>
+
+        <block title="Equivalent formulation">
+          Goldbach's conjecture holds iff <m>r(n) \geq 1</m> for all
+          even <m>n \geq 4</m>.
+        </block>
+      </frame>
+
+      <frame title="The Exponential Sum">
+        <p>
+          For <m>\alpha \in \mathbb{R}/\mathbb{Z}</m>, define the
+          <alert>Weyl sum</alert>
+          <dmath>
+            S(\alpha) \;=\; \sum_{p \leq N} e^{2\pi i \alpha p},
+          </dmath>
+          where the sum runs over primes <m>p \leq N</m>.
+        </p>
+
+        <pause/>
+
+        <p>
+          By orthogonality of characters,
+          <dmath>
+            r(n) \;=\; \int_0^1 S(\alpha)^2 \, e^{-2\pi i \alpha n}\,d\alpha.
+          </dmath>
+        </p>
+
+        <alertblock title="Key insight">
+          The size of <m>S(\alpha)</m> depends sensitively on how well
+          <m>\alpha</m> is approximated by rationals with small denominators.
+        </alertblock>
+      </frame>
+
+    </section>
+
+    <!-- ── Section 2 ───────────────────────────────────────────── -->
+
+    <section name="Major and Minor Arcs">
+
+      <frame title="Farey Dissection">
+        <p>
+          Fix <m>Q = (\log N)^B</m>. The <b>major arcs</b> are
+          <dmath>
+            \mathfrak{M} \;=\;
+            \bigcup_{\substack{q \leq Q \\ \gcd(a,q)=1}}
+            \left[\frac{a}{q} - \frac{1}{qN},\, \frac{a}{q} + \frac{1}{qN}\right].
+          </dmath>
+          The <b>minor arcs</b> are <m>\mathfrak{m} = [0,1] \setminus \mathfrak{M}</m>.
+        </p>
+
+        <pause/>
+
+        <columns>
+          <column width="0.48\textwidth">
+            <exampleblock title="Major arcs">
+              <m>|S(\alpha)|</m> is large — controlled by
+              Gauss sums and the von Mangoldt function.
+            </exampleblock>
+          </column>
+          <column width="0.48\textwidth">
+            <alertblock title="Minor arcs">
+              <m>|S(\alpha)|</m> is small — Weyl/Vinogradov
+              estimates give power saving.
+            </alertblock>
+          </column>
+        </columns>
+      </frame>
+
+      <frame title="The Main Theorem (Vinogradov, 1937)" fragile="false">
+        <theorem>
+          Every sufficiently large <em>odd</em> integer is the sum of
+          three primes. Equivalently,
+          <dmath>
+            r_3(n) \;\sim\; \frac{n^2}{2(\log n)^3}
+            \prod_{p \mid n} \frac{p-1}{p-2}
+            \prod_{p} \left(1 - \frac{1}{(p-1)^2}\right)
+          </dmath>
+          as <m>n \to \infty</m> through odd integers.
+        </theorem>
+
+        <pause/>
+
+        <remark>
+          The two-prime analogue (Goldbach) remains open. The minor arc
+          bound for <m>S(\alpha)^2</m> is the obstruction.
+        </remark>
+      </frame>
+
+    </section>
+
+    <!-- ── Section 3 ───────────────────────────────────────────── -->
+
+    <section name="Singular Series">
+
+      <frame title="The Singular Series">
+        <p>
+          The major arc contribution yields the <alert>singular series</alert>
+          <dmath>
+            \mathfrak{S}(n) \;=\; \sum_{q=1}^{\infty}
+            \sum_{\substack{a=1 \\ \gcd(a,q)=1}}^{q}
+            \frac{\mu(q)^2}{\phi(q)^2}
+            \sum_{\substack{a_1+a_2 \equiv n \pmod{q}}}
+            e^{2\pi i (a_1+a_2)/q}.
+          </dmath>
+        </p>
+
+        <exampleblock title="For even n">
+          <m>\mathfrak{S}(n) = 2\displaystyle\prod_{p > 2} \!\!\left(1 -
+          \frac{1}{(p-1)^2}\right) \cdot
+          \prod_{\substack{p \mid n \\ p > 2}} \frac{p-1}{p-2} \;\geq\; c > 0.</m>
+        </exampleblock>
+      </frame>
+
+    </section>
+
+  </body>
+</document>

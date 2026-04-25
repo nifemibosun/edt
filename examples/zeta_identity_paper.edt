@@ -1,0 +1,185 @@
+<document class="article" options="12pt">
+  <usepackage name="amsmath, amssymb, amsthm"/>
+  <usepackage name="hyperref"/>
+  <usepackage name="geometry" options="margin=1in"/>
+  <usepackage name="microtype"/>
+
+  <!-- Theorem environments -->
+  <newtheorem name="theorem" title="Theorem"/>
+  <newtheorem name="corollary" title="Corollary" shared="theorem"/>
+  <newtheorem name="lemma"     title="Lemma"     shared="theorem"/>
+  <theoremstyle style="remark"/>
+  <newtheorem* name="remark" title="Remark"/>
+
+  <body>
+    <title>
+      A Double-Sum Identity Connecting Geometric Series\\
+      and the Riemann Zeta Function
+    </title>
+    <author>Nifemi Bosun</author>
+    <date/>
+    <maketitle/>
+
+    <abstract>
+      We prove the identity
+      <dmath>
+        \sum_{k=2}^{\infty} \bigl(\zeta(k) - 1\bigr) = 1,
+      </dmath>
+      where <m>\zeta</m> denotes the Riemann zeta function. The proof proceeds
+      by re-expressing each summand as a tail of the zeta series, interchanging
+      the order of summation, evaluating the resulting geometric series in
+      closed form, and recognising the outcome as a telescoping sum. Several
+      consequences and related observations are noted.
+    </abstract>
+
+    <section name="Introduction">
+
+      <p>
+        The Riemann zeta function, defined for real <m>s > 1</m> by
+        <dmath>
+          \zeta(s) \;=\; \sum_{n=1}^{\infty} \frac{1}{n^s},
+        </dmath>
+        occupies a central position in analytic number theory. Its values at
+        positive integer arguments have been studied extensively; for instance,
+        Euler's celebrated result <m>\zeta(2) = \pi^2/6</m> belongs to this
+        family. Less commonly noted are identities involving <em>sums</em>
+        taken over the integer arguments themselves.
+      </p>
+
+      <p>
+        Observe that for each integer <m>k \geq 2</m>,
+        <dmath>
+          \zeta(k) - 1 \;=\; \sum_{n=2}^{\infty} \frac{1}{n^k},
+        </dmath>
+        since the <m>n = 1</m> term of the zeta series equals <m>1</m>. The
+        quantity <m>\zeta(k) - 1</m> therefore measures how much <m>\zeta(k)</m>
+        exceeds its dominant term, and it decreases rapidly to zero as
+        <m>k \to \infty</m>. It is natural to ask whether the series
+        <m>\sum_{k=2}^{\infty}(\zeta(k)-1)</m> converges, and if so, to what
+        value.
+      </p>
+
+      <p>
+        The answer is both affirmative and striking: the sum equals exactly
+        <m>1</m>. We prove this below.
+      </p>
+
+    </section>
+
+    <section name="Main Result">
+
+      <theorem>
+        <dmath>
+          \sum_{k=2}^{\infty} \bigl(\zeta(k) - 1\bigr) \;=\; 1.
+        </dmath>
+      </theorem>
+
+      <proof>
+        Substituting the series definition of <m>\zeta(k) - 1</m>, we write
+        <eq id="eq:double">
+          \sum_{k=2}^{\infty} \bigl(\zeta(k) - 1\bigr)
+          \;=\; \sum_{k=2}^{\infty} \sum_{n=2}^{\infty} \frac{1}{n^k}.
+        </eq>
+        Since every term <m>1/n^k</m> is strictly positive, the double sum
+        <eqref id="eq:double"/> is a sum of non-negative terms. By Tonelli's
+        theorem (or, equivalently, by the classical rearrangement theorem for
+        series of non-negative reals), the order of summation may be freely
+        interchanged:
+        <dmath>
+          \sum_{k=2}^{\infty} \sum_{n=2}^{\infty} \frac{1}{n^k}
+          \;=\; \sum_{n=2}^{\infty} \sum_{k=2}^{\infty} \frac{1}{n^k}.
+        </dmath>
+        For each fixed <m>n \geq 2</m>, the inner sum is a geometric series
+        with first term <m>1/n^2</m> and common ratio <m>1/n \in (0, 1)</m>:
+        <dmath>
+          \sum_{k=2}^{\infty} \frac{1}{n^k}
+          \;=\; \frac{1/n^2}{1 - 1/n}
+          \;=\; \frac{1}{n^2} \cdot \frac{n}{n-1}
+          \;=\; \frac{1}{n(n-1)}.
+        </dmath>
+        Partial fractions give
+        <m>\dfrac{1}{n(n-1)} = \dfrac{1}{n-1} - \dfrac{1}{n}</m>, so
+        <dmath>
+          \sum_{n=2}^{\infty} \frac{1}{n(n-1)}
+          \;=\; \sum_{n=2}^{\infty} \left(\frac{1}{n-1} - \frac{1}{n}\right).
+        </dmath>
+        This is a telescoping series whose partial sums satisfy
+        <dmath>
+          \sum_{n=2}^{N} \left(\frac{1}{n-1} - \frac{1}{n}\right)
+          \;=\; 1 - \frac{1}{N} \;\longrightarrow\; 1
+          \quad \text{as } N \to \infty.
+        </dmath>
+        Therefore <m>\displaystyle\sum_{k=2}^{\infty}(\zeta(k)-1) = 1</m>.
+      </proof>
+
+    </section>
+
+    <section name="Remarks and Consequences">
+
+      <remark>
+        The interchange of summation is the pivotal step. Because all summands
+        are positive, no absolute convergence argument beyond positivity is
+        required. Had the terms been of mixed sign, a more delicate
+        justification (e.g.\ via dominated convergence or absolute summability)
+        would be necessary.
+      </remark>
+
+      <remark>
+        The identity can be seen as a <em>repackaging</em> of the well-known
+        partial-fraction decomposition
+        <dmath>
+          \sum_{n=2}^{\infty} \frac{1}{n(n-1)} = 1.
+        </dmath>
+        What the zeta function contributes is the exact route from
+        integer-valued Dirichlet series to that decomposition via geometric
+        series. In this sense, the proof traces a path: <em>zeta values
+        <m>\to</m> geometric series <m>\to</m> partial fractions <m>\to</m>
+        telescoping</em>.
+      </remark>
+
+      <corollary>
+        For any integer <m>m \geq 2</m>,
+        <dmath>
+          \sum_{k=m}^{\infty} \bigl(\zeta(k) - 1\bigr)
+          \;=\; \sum_{n=2}^{\infty} \frac{1}{n^{m-1}(n-1)}.
+        </dmath>
+      </corollary>
+
+      <proof>
+        The same interchange of summation gives
+        <dmath>
+          \sum_{k=m}^{\infty} \bigl(\zeta(k) - 1\bigr)
+          \;=\; \sum_{n=2}^{\infty} \sum_{k=m}^{\infty} \frac{1}{n^k}
+          \;=\; \sum_{n=2}^{\infty} \frac{1/n^m}{1 - 1/n}
+          \;=\; \sum_{n=2}^{\infty} \frac{1}{n^{m-1}(n-1)}.
+        </dmath>
+        The theorem corresponds to <m>m = 2</m>, in which case the
+        right-hand side reduces to
+        <m>\sum_{n=2}^{\infty} \frac{1}{n(n-1)} = 1</m>.
+      </proof>
+
+      <remark>
+        The corollary shows that partial sums of our series (summing from
+        <m>k = m</m> onward) admit closed-form expressions as Dirichlet-type
+        series in <m>n</m>. As <m>m</m> grows, these tails converge more
+        rapidly, consistent with <m>\zeta(k) - 1</m> being exponentially small
+        for large <m>k</m>.
+      </remark>
+
+      <remark>
+        A formal kinship exists with the identity
+        <dmath>
+          \sum_{k=2}^{\infty} \bigl(\zeta(k) - 1\bigr)(-1)^k
+          = \frac{1}{2} - \gamma,
+        </dmath>
+        where <m>\gamma</m> is the Euler<ndash/>Mascheroni constant, which can
+        be established by analogous means using the alternating-sign version of
+        the series swap. This suggests the present identity sits within a
+        broader family parametrised by the sign pattern of
+        <m>\zeta(k) - 1</m>.
+      </remark>
+
+    </section>
+
+  </body>
+</document>
