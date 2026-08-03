@@ -1,7 +1,16 @@
 {
   "name": "edt",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "HTML-like markup language that compiles to LaTeX",
+  "author": "nifemibosun <nifemibosun70@gmail.com>",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "tsc & npm link"
+  },
+  "bin": {
+    "edt": "./dist/cli.js"
+  },
   "keywords": [
     "latex",
     "markup",
@@ -9,23 +18,8 @@
     "typesetting",
     "math"
   ],
-  "author": "nifemibosun",
-  "license": "MIT",
-  "bin": {
-    "edt": "./bin/edt.js"
-  },
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "scripts": {
-    "build": "tsc",
-    "dev": "tsc --watch",
-    "test": "node dist/test/run.js"
-  },
   "devDependencies": {
-    "@types/node": "^20.19.39",
-    "typescript": "^5.9.3"
-  },
-  "engines": {
-    "node": ">=16.0.0"
+    "@types/node": "^26.1.2",
+    "typescript": "^7.0.2"
   }
 }
